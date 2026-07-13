@@ -32,7 +32,6 @@ class NetworkManager: NetworkManagerProtocol {
         guard let url = URL(string: urlString) else { return }
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let error = error {
-                print("Network error: \(error.localizedDescription)")
                 completion(.failure(error))
                 return
             }
@@ -42,7 +41,6 @@ class NetworkManager: NetworkManagerProtocol {
                 let result = try JSONDecoder().decode(ArticleResponse.self, from: data)
                 completion(.success(result.articles))
             } catch {
-                print("Decoding error: \(error)")
                 completion(.failure(error))
             }
         }.resume()

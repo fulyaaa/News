@@ -42,7 +42,6 @@ class NewsViewController: UIViewController {
         ])
         
         viewModel.delegate = self
-        print("Calling fetchTopHeadlines")
         viewModel.fetchTopHeadlines()
     }
 }
