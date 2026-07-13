@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class NewsCell: UICollectionViewCell {
     
@@ -91,11 +92,18 @@ class NewsCell: UICollectionViewCell {
                                moreButton.heightAnchor.constraint(equalToConstant: 30)
                            ])
                        }
+    
     func configure(with article: Article) {
-           titleLabel.text = article.title
-           authorLabel.text = article.author ?? article.source.name
-           dateLabel.text = formatDate(article.publishedAt)
-       }
+        titleLabel.text = article.title
+        authorLabel.text = article.author ?? article.source.name
+        dateLabel.text = formatDate(article.publishedAt)
+        
+        if let urlString = article.urlToImage, let url = URL(string: urlString) {
+            newsImageView.kf.setImage(with: url)
+        } else {
+            newsImageView.image = UIImage(systemName: "newspaper")
+        }
+    }
        
        private func formatDate(_ dateString: String) -> String {
            let formatter = ISO8601DateFormatter()
