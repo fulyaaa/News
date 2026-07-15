@@ -64,7 +64,14 @@ extension NewsViewController: UICollectionViewDataSource {
 extension NewsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        // İleride: News Detail ekranına geçiş buraya gelecek
+        
+        let article = viewModel.article(at: indexPath.item)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let detailVC = storyboard.instantiateViewController(withIdentifier: "NewsDetailViewController") as! NewsDetailViewController
+        detailVC.article = article
+        
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }
 
