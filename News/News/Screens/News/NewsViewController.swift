@@ -32,6 +32,13 @@ class NewsViewController: UIViewController {
         title = "News"
         view.backgroundColor = .systemBackground
         
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search news..."
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        
         view.addSubview(collectionView)
         
         NSLayoutConstraint.activate([
@@ -82,5 +89,18 @@ extension NewsViewController: NewsViewModelDelegate {
     
     func didFetchWithError(_ error: Error) {
         print("Error fetching articles: \(error.localizedDescription)")
+    }
+}
+
+extension NewsViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let query = searchController.searchBar.text, !query.isEmpty else {
+            viewModel.fetchTopHeadlines()
+            return
+        }
+        
+        if query.count > 3 {
+            viewModel.searchNews(query: query)
+        }
     }
 }

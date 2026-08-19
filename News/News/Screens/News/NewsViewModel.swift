@@ -45,4 +45,20 @@ class NewsViewModel {
     func article(at index: Int) -> Article {
         articles[index]
     }
+    
+    func searchNews(query: String) {
+        networkManager.searchNews(query: query) { [weak self] result in
+            switch result {
+            case .success(let articles):
+                self?.articles = articles
+                DispatchQueue.main.async {
+                    self?.delegate?.didFetchArticles()
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self?.delegate?.didFetchWithError(error)
+                }
+            }
+        }
+    }
 }
