@@ -53,6 +53,8 @@ class NewsCell: UICollectionViewCell {
         return button
     }()
     
+    var moreButtonTapped: (() -> Void)?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -91,6 +93,7 @@ class NewsCell: UICollectionViewCell {
                                moreButton.widthAnchor.constraint(equalToConstant: 30),
                                moreButton.heightAnchor.constraint(equalToConstant: 30)
                            ])
+        moreButton.addTarget(self, action: #selector(moreButtonTapped(_:)), for: .touchUpInside)
                        }
     
     func configure(with article: Article) {
@@ -120,4 +123,8 @@ class NewsCell: UICollectionViewCell {
                       return "\(Int(diff / 86400))d ago"
                   }
               }
+    
+    @objc private func moreButtonTapped(_ sender: UIButton) {
+        moreButtonTapped?()
+    }
 }

@@ -64,6 +64,25 @@ extension NewsViewController: UICollectionViewDataSource {
         }
         let article = viewModel.article(at: indexPath.item)
         cell.configure(with: article)
+        cell.moreButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            
+            let shareAction = UIAlertAction(title: "Haberi Paylaş", style: .default) { _ in
+                if let url = URL(string: article.url) {
+                    let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+                    self.present(activityVC, animated: true)
+                }
+            }
+            
+            let cancelAction = UIAlertAction(title: "İptal", style: .cancel)
+            
+            sheet.addAction(shareAction)
+            sheet.addAction(cancelAction)
+            
+            self.present(sheet, animated: true)
+        }
         return cell
     }
 }
