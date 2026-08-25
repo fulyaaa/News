@@ -50,6 +50,8 @@ class NewsViewController: UIViewController {
         
         viewModel.delegate = self
         viewModel.fetchTopHeadlines()
+        
+        tabBarItem = UITabBarItem(title: "News", image: UIImage(systemName: "newspaper"), tag: 0)
     }
 }
   
