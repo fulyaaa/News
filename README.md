@@ -1,4 +1,4 @@
-# News App 📱
+# News 📱
 
 A news application built with Swift and UIKit following MVVM architecture.
 
