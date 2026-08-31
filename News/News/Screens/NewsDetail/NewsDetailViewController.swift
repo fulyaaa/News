@@ -96,7 +96,7 @@ class NewsDetailViewController: UIViewController {
             private func configure() {
                 guard let article = article else { return }
                 
-                contentLabel.text = article.content ?? article.description ?? "No content available."
+                contentLabel.text = article.content ?? article.description ?? NSLocalizedString("no_content", comment: "")
                 
                 if let urlString = article.urlToImage, let url = URL(string: urlString) {
                     newsImageView.kf.setImage(with: url)

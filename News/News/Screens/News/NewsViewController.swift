@@ -27,15 +27,14 @@ class NewsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("viewDidLoad called")
         
-        title = "News"
+        title = NSLocalizedString("news_title", comment: "")
         view.backgroundColor = .systemBackground
         
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search news..."
+        searchController.searchBar.placeholder = NSLocalizedString("search_placeholder", comment: "")
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         
@@ -71,14 +70,14 @@ extension NewsViewController: UICollectionViewDataSource {
             
             let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             
-            let shareAction = UIAlertAction(title: "Haberi Paylaş", style: .default) { _ in
+            let shareAction = UIAlertAction(title: NSLocalizedString("share_article", comment: ""), style: .default) { _ in
                 if let url = URL(string: article.url) {
                     let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
                     self.present(activityVC, animated: true)
                 }
             }
             
-            let cancelAction = UIAlertAction(title: "İptal", style: .cancel)
+            let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel)
             
             sheet.addAction(shareAction)
             sheet.addAction(cancelAction)
