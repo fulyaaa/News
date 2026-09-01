@@ -2,6 +2,8 @@
 
 A news application built with Swift and UIKit following MVVM architecture.
 
+![Demo](demo.gif)
+
 ## Features
 - Browse top headlines from NewsAPI
 - Search news articles
